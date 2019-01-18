@@ -1,42 +1,18 @@
-# Welcome
+# Optimisation of the readout system from the NED Experiment
 
-Welcome to your wiki! This is the default page we've installed for your convenience. Go ahead and edit it.
+Welcome first years! This problem sheet goes through a simplified commissioning of the NED (Non-existent Detector) experiment. There are three separate tasks, and working in pairs or small groups, each team should tackle each part asynchronously ;). Once you've decided the order of tasks, read through the background of the experiment, and keep track of your solutions in a set of google slides.
 
-## Wiki features
+## Background
+The NED experiment has a very basic detector that's similar to a dark matter experiment: a tank of liquid scintillator that is coupled to a relatively small number of read-out PMT channels (100). The experiment currently aims to measure the energy spectrum of a newly discovered radioactive source found in the Nevada dessert. For reasons unknown to man-kind (but perhaps known to alien-kind), the signal rate of this source is quite small, and so the data also contains a large intrinsic background (e.g natural radioactivity and cosmic rays). Being a HEP experiment, the DAQ was built on a shoe string budget, and is formed of mostly CMS reject components  - unfortunately, as a result, the readout system **only** returns two variables for each trigger: the total energy deposit, and the detector occupancy (i.e number of channels above zero suppression).
 
-This wiki uses the [Markdown](http://daringfireball.net/projects/markdown/) syntax. The [MarkDownDemo tutorial](https://bitbucket.org/tutorials/markdowndemo) shows how various elements are rendered. The [Bitbucket documentation](https://confluence.atlassian.com/x/FA4zDQ) has more information about using a wiki.
+### Software
 
-The wiki itself is actually a git repository, which means you can clone it, edit it locally/offline, add images or any other file type, and push it back to us. It will be live immediately.
+The DAQ software and run control software is in this repository, and can be cloned publicly using git https:
 
-Go ahead and try:
+git clone https://dan_saunders@bitbucket.org/dan_saunders/ned_experiment.git
 
-```
-$ git clone https://dan_saunders@bitbucket.org/dan_saunders/ned_experiment.git/wiki
-```
+DAQ.py contains code to retrieve data from the experiment (using a simulation). Run.py contains a set of functions that show examples of taking runs, and some useful monitoring plots. You should have a quick read through both files. A third file, named doNotRead.py, should not be read, unless you are a spoil sport. 
 
-Wiki pages are normal files, with the .md extension. You can edit them locally, as well as creating new ones.
+Before attempting the following questions, first try to run the example run function ('''run_example'''). 
 
-## Syntax highlighting
-
-
-You can also highlight snippets of text (we use the excellent [Pygments][] library).
-
-[Pygments]: http://pygments.org/
-
-
-Here's an example of some Python code:
-
-```
-#!python
-
-def wiki_rocks(text):
-    formatter = lambda t: "funky"+t
-    return formatter(text)
-```
-
-
-You can check out the source of this page to see how that's done, and make sure to bookmark [the vast library of Pygment lexers][lexers], we accept the 'short name' or the 'mimetype' of anything in there.
-[lexers]: http://pygments.org/docs/lexers/
-
-
-Have fun!
+## Part 1 - Deciding trigger variables
