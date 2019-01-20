@@ -37,7 +37,7 @@ It's important to know the level of deadtime for the possible different trigger 
 * What are the consequences for physics measurements for a high deadtime? 
 * Map the deadtime as a function of both trigger variables.
 
-Since, the experiment was put together quickly, the DAQ is not perfectly optimised. 
+Since the experiment was put together quickly, the DAQ is not perfectly optimised. 
 
 * Read through DAQ.py - are there any optimisations that can be made to decrease the deadtime? 
 * Do your above results change given these optimisations?
