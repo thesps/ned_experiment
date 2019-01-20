@@ -7,7 +7,7 @@ The NED experiment has a very basic detector that's similar to a dark matter exp
 
 Being a HEP experiment, the readout system was built on a shoe string budget, and is formed of mostly CMS reject components  - unfortunately, as a result, the readout system can **only** returns two variables for each trigger: the total energy deposit (in units of ADC, summed over all channels), and the detector occupancy (i.e number of channels above zero suppression). The trigger of the experiment allows for one threshold condition that can be placed on either variable (i.e energy or occupancy). The rate of signal and background is too high to trigger on all events, and both of these variables offer some level of discrimination between signal and background, but its not yet clear which variable should be used. 
 
-The dominant source of deadtime at NED is due to a bottleneck in data-rate. Triggers can be received, and counted, but they're corresponding data will be discarded to reduce data-rate (not necessarily in an unbiased way w.r.t the Physics). 
+The dominant source of deadtime at NED is due to a bottleneck in data-rate, which increases above zero from around 15 MB per run and higher. Triggers can be received, and counted, but they're corresponding data will be discarded to reduce data-rate (not necessarily in an unbiased way w.r.t the Physics). 
 
 ### Software
 
