@@ -10,7 +10,7 @@ The NED experiment has a very basic detector that's similar to a dark matter exp
 
 The DAQ software and run control software is in this repository, and can be cloned publicly using git https:
 
-'''git clone https://dan_saunders@bitbucket.org/dan_saunders/ned_experiment.git'''
+```git clone https://dan_saunders@bitbucket.org/dan_saunders/ned_experiment.git```
 
 DAQ.py contains code to retrieve data from the experiment (using a simulation). Run.py contains a set of functions that show examples of taking runs, and some useful monitoring plots. You should have a quick read through both files. A third file, named doNotRead.py, should not be read, unless you are a spoil sport. 
 
