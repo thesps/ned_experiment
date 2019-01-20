@@ -123,7 +123,7 @@
 import numpy as np
 np.random.seed(1)
 
-def generate(trigger_settings):
+def generate(trigger_settings, en_ret_type, prescale):
     # Checks someone didn't pass two thresholds.
     ks = trigger_settings.keys()
     if 'energy_thresh' in ks and 'occupancy_thresh' in ks:
@@ -136,25 +136,59 @@ def generate(trigger_settings):
     
     print 'Running NED experiment with settings:', trigger_settings
     data = {}
-    N = 100000
-    s_ens = np.random.normal(loc = 2, scale = 1.5, size = N)
-    s_ocs = np.random.normal(loc = 10, scale = 4, size = N).astype(int)
+    occ_type = 'int8'
+
+    N = 1000000 // prescale
+    Nb = 2*N
+
+    s_ens = np.random.normal(loc = 500, scale = 200, size = N).astype(en_ret_type)
+    s_ocs = np.random.poisson(lam = 8, size = N).astype(occ_type)
 
     # Introduce some correlation.
-    s_ens += 0.0001*np.square(np.square(s_ocs))
+    shift = 0.01*np.square(np.square(s_ocs))
+    shift = shift.astype(en_ret_type)
+    s_ens += shift
     
-    b_ens = np.random.exponential(scale = 7, size = N)
-    b_ocs = np.random.exponential(scale = 5, size = N)
+    b_ens = np.random.exponential(scale = 800, size = Nb).astype(en_ret_type)
+    b_ocs = np.random.exponential(scale = 5, size = Nb).astype(occ_type)
  
     data['energies'] = np.concatenate([s_ens, b_ens])
     data['occupancies'] = np.concatenate([s_ocs, b_ocs])
 
     # Shuffle along one axis.
     merged_data = np.array([data['energies'], data['occupancies']])
+    
+    # Apply the trigger requirements.
+    if 'energy_thresh' in ks:
+        merged_data = merged_data[:, merged_data[0] > trigger_settings['energy_thresh'] ]
+        data['tpr'] = np.sum(s_ens > trigger_settings['energy_thresh']) / float(N)
+        data['fpr'] = np.sum(b_ens > trigger_settings['energy_thresh']) / float(Nb)
+    else:
+        merged_data = merged_data[:, merged_data[1] > trigger_settings['occupancy_thresh'] ]
+        data['tpr'] = np.sum(s_ocs > trigger_settings['occupancy_thresh']) / float(N)
+        data['fpr'] = np.sum(b_ocs > trigger_settings['occupancy_thresh']) / float(Nb)
+        
+
     np.random.shuffle(merged_data.T)
-    data['energies'] = merged_data[0]
-    data['occupancies'] = merged_data[1]
-     
+
+    data['energies'] = merged_data[0].astype(en_ret_type)
+    data['occupancies'] = merged_data[1].astype('int8')
+    data['ntriggers'] = len(data['energies'])
+    data['storage_space_bytes'] = data['energies'].nbytes + data['occupancies'].nbytes
+    data['event_size_bytes'] = data['energies'][0].nbytes + data['occupancies'][0].nbytes
+    data['deadtime_fraction'] = 0
+
+    storage_limit_bytes = 15e6
+    if data['storage_space_bytes'] > storage_limit_bytes:
+        print '\n** Warning: deadtime non-zero! **\n'
+        data['deadtime_fraction'] = 1-storage_limit_bytes/float(data['storage_space_bytes'])
+
+        Nkeep = int(storage_limit_bytes/float(data['storage_space_bytes']) * data['ntriggers'])
+
+        data['energies'] = data['energies'][:Nkeep]
+        data['occupancies'] = data['occupancies'][:Nkeep]
+        data['storage_space_bytes'] = data['energies'].nbytes + data['occupancies'].nbytes
+    
     return data
 
 
