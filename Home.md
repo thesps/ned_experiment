@@ -29,6 +29,8 @@ In order to decide on which variable to use in the trigger, start by considering
 
 *Nb: to avoid bias, you should always use settings that ensure that the dead-time fraction is kept at zero for this part of the exercise.* 
 
+Using your results, propose a set of trigger settings that give a stable data rate of 5 MB per run. 
+
 ## Part 2 - Deadtime characterisation
 
 It's important to know the level of deadtime for the possible different trigger conditions that can be applied. Start by considering the following:
