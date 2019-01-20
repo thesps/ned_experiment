@@ -43,4 +43,4 @@ Since, the experiment was put together quickly, the DAQ is not perfectly optimis
 
 # Solutions
 
-The solutions can be found in a jupyter-notebook in this repository.
+The solutions can be found in a jupyter-notebook in this repository. A typical set of solutions are about 20 lines of code in total (mostly just plotting). You should only ever have to change a couple of lines in files cloned in this repository.
