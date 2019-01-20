@@ -26,10 +26,9 @@ In order to decide on which variable to use in the trigger, start by considering
 * Based on how the data is distributed in the two variables, which do you expect to offer better discrimination?
 * Quantify which variable offers better discrimination at the trigger level. What plots are needed to demonstrate this? Demonstrate this. 
 * Are there any physics motivations to select one variable over the other?
+* Using your results, propose a set of trigger settings that give a stable data rate of 5 MB per run. Do you need any more information?
 
 *Nb: to avoid bias, you should always use settings that ensure that the dead-time fraction is kept at zero for this part of the exercise.* 
-
-Using your results, propose a set of trigger settings that give a stable data rate of 5 MB per run. 
 
 ## Part 2 - Deadtime characterisation
 
