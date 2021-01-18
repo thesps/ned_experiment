@@ -25,19 +25,19 @@ def run(trigger_settings, prescale = 1):
     # Print out a few useful things (documented here).
     # Total number of triggers (nb: in this convention, this does not account for 
     # any deadtime - at NED, triggers are counted but not saved if in deadtime).
-    print 'nTriggers:', data['ntriggers']
+    print('nTriggers:', data['ntriggers'])
     
     # Signal efficiency (between 0 and 1).
-    print 'tpr (i.e signal efficiency):', data['tpr']
+    print('tpr (i.e signal efficiency):', data['tpr'])
 
     # Signal efficiency (between 0 and 1).
-    print 'fpr (i.e background efficiency):', data['fpr']
+    print('fpr (i.e background efficiency):', data['fpr'])
 
     # Total storage space used by run file.
-    print 'Storage space (MB):', data['storage_space_bytes']/1000000.
-    print 'Trigger data size (bytes):', data['event_size_bytes']
+    print('Storage space (MB):', data['storage_space_bytes']/1000000.)
+    print('Trigger data size (bytes):', data['event_size_bytes'])
 
     # Deadtime measured as the fraction of triggers discarded.
-    print 'Deadtime fraction:', data['deadtime_fraction']
+    print('Deadtime fraction:', data['deadtime_fraction'])
 
     return data
